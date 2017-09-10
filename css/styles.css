@@ -31,3 +31,8 @@
 	background-color: #fff;
 	border-bottom: 1px solid #000099
 }
+
+/*common css*/
+.error-text{
+	color:#d0021b;
+}
