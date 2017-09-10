@@ -6,9 +6,28 @@
 	margin:50px auto;
 	height:380px;
 }
-.dg-login-btn{
+.dg-login-btn,.dg-register-btn{
 	margin-top: 30px
 }
 .dg-reglink{
 	margin-top: 20px;
+}
+
+
+/*Nav Bar Styles*/
+.navbar ul{
+	float:none;
+}
+.navbar ul>li{
+	float:left !important;
+	width: 33% !important;
+	background: #fff
+}
+.navbar ul>li a{
+	text-align: center;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+	background-color: #fff;
+	border-bottom: 1px solid #000099
 }
