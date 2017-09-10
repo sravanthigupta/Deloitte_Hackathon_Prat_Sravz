@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="../css/bootstrapv3.3.6.css" >
 		<link rel="stylesheet" href="../css/styles.css" >
 	</head>	
-	<body>
+	<body ng-app="regApp" ng-controller="regCtrl">
 		<div class="container-fluid dg-container">
 		  	<h1 class="text-center">DigiGyan App</h1>
 		  	<div class="well dg-login-form">
@@ -12,26 +12,59 @@
 					<h3>Register</h3>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" ng-model="regObj.usrname">
+						<p class="error-text" ng-show="mandatoryError==true && regObj.usrname==''">Please fill in username</p>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Password</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="regObj.pwd">
+						<p class="error-text" ng-show="mandatoryError==true && regObj.pwd==''">Please fill in password</p>
 					</div>
 					
 					<div class="checkbox">
-					  <label><input type="checkbox" value="html">HTML</label>
+					  <label><input type="checkbox" value="html" ng-model="regObj.tags.html" ng-checked="regObj.tags.html">HTML</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" value="js">JS</label>
+					  <label><input type="checkbox" value="js" ng-model="regObj.tags.javascript" ng-checked="regObj.tags.javascript">JS</label>
 					</div>
 					<div class="checkbox">
-					  <label><input type="checkbox" value="css">CSS</label>
+					  <label><input type="checkbox" value="css" ng-model="regObj.tags.css" ng-checked="regObj.tags.css">CSS</label>
+					  <p class="error-text" ng-show="mandatoryError==true && (regObj.tags.html==false && regObj.tags.css==false && regObj.tags.javascript==false)">Please select one of the tags</p>
 					</div>
-					<button type="submit" class="btn btn-primary center-block dg-register-btn">Register</button>
+					<button type="submit" class="btn btn-primary center-block dg-register-btn" ng-click="register(regObj.usrname,regObj.pwd,regObj.tags.html,regObj.tags.css,regObj.tags.javascript)">Register</button>
 					
 				</form>
 			</div>
 		</div>
 	</body>
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="../js/angular.js"></script>
+
+	<script>
+		var app=angular.module("regApp",[]);
+		app.controller("regCtrl",regCtrl);
+		function regCtrl($scope){
+			$scope.regObj={
+				"usrname":"",
+				"pwd":"",
+				"tags":{
+					"html":false,
+					"css":false,
+					"javascript":false
+				}
+			}
+
+		$scope.register=function(user,pwd,html,css,js){
+				$scope.mandatoryError=false;
+               if(user && pwd && (html || css || js)){
+               	//var test=angular.element("[ng-controller='loginCtrl']").scope().loginObj;
+               	 window.location.href="../index.html";       
+               }else{
+               	$scope.mandatoryError=true;
+               }
+      
+     
+		}	
+		}
+	</script>
 </html>
