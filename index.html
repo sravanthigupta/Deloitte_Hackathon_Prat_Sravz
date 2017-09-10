@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="css/bootstrapv3.3.6.css" >
 		<link rel="stylesheet" href="css/styles.css" >
 	</head>	
-	<body>
+	<body ng-app="loginApp" ng-controller="loginCtrl">
 		<div class="container-fluid dg-container">
 		  	<h1 class="text-center">DigiGyan App</h1>
 		  	<div class="well dg-login-form">
@@ -12,16 +12,73 @@
 					<h3>Login</h3>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Email address</label>
-						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+						<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" ng-model="login.username">
 					</div>
 					<div class="form-group">
 						<label for="exampleInputPassword1">Password</label>
-						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+						<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="login.password">
 					</div>
-					<button type="submit" class="btn btn-primary center-block dg-login-btn">Login</button>
-					<a href="#" class="center-block text-center dg-reglink">Register Here</a>
+					<p class="error-text" ng-show="showmsg">Please fill in valid username and password</p>
+					<button type="submit" class="btn btn-primary center-block dg-login-btn" ng-click="login(login.username,login.password)">Login</button>
+					<a href="./pages/reg-screen.html" class="center-block text-center dg-reglink">Register Here</a>
 				</form>
 			</div>
 		</div>
 	</body>
+	<script src="js/angular.js"></script>
+	<script>
+		var app=angular.module("loginApp",[]);
+		app.controller("loginCtrl",loginCtrl);
+		function loginCtrl($scope){
+               $scope.login={
+               	"username":"",
+               	"password":""
+               }
+            $scope.loginObj=[
+  {
+    "usrname": "sravanthi@test.com",
+    "pwd": "password1",
+    "tags":{
+    	"html":true,
+    	"css":true,
+    	"javascript":true
+    }
+  },
+  {
+    "usrname": "pratyusha@test.com",
+    "pwd": "password2",
+    "tags":{
+    	"html":true,
+    	"css":true,
+    	"javascript":true
+    }
+  },
+  {
+    "usrname": "sravanthi1@test.com",
+    "pwd": "password3",
+    "tags":{
+    	"html":true,
+    	"css":true,
+    	"javascript":true
+    }
+  }
+];
+              $scope.login=function(usr,pwd){
+              	$scope.showmsg=false;
+              	if(usr && pwd){
+              		angular.forEach($scope.loginObj,function(value,index){
+              			if(value.usrname == usr && value.pwd == pwd){
+                           window.location.href="./pages/mainpage.html";
+                           $scope.showmsg=false;
+              			} 
+              		});
+              	}else{
+              		$scope.showmsg=true;
+              	}
+              	console.log("in login");
+              } 
+
+           
+		}
+	</script>
 </html>
