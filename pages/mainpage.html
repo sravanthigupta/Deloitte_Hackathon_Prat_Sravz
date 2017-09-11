@@ -1,0 +1,56 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../css/bootstrapv3.3.6.css" >
+		<link rel="stylesheet" href="../css/styles.css" >
+		<script src="../js/jquery-3.1.1.min.js"></script>
+		<script src="../js/custom-script.js"></script>
+	</head>	
+	<body ng-app="mainApp" ng-controller="mainCtrl">
+		<nav class="navbar navbar-default">
+			<ul class="nav navbar-nav">
+			  <li class="active"><a href="#questions">Questions</a></li>
+			  <li><a href="#myquestions" id="myquestslink">My Questions</a></li>
+			  <li><a href="#askquestion">Ask A Question</a></li>
+			</ul>
+		</nav>
+		<div class="main-section">
+			<div id="questions" class="">
+				<div class="ques-block" ng-repeat="x in questionsObj">
+					<h3 class="question-head">{{x.title}}</h3>
+					<p class="question-desc">{{x.description}}</p>
+				</div>
+			</div>
+			<div id="myquestions" class="hide">				
+				<div class="ques-block" ng-repeat="x in questionsObj|filter:{username:loggedinObj.usrname}">
+					<h3 class="question-head">{{x.title}}</h3>
+					<p class="question-desc">{{x.description}}</p>
+				</div>			
+			</div>
+			<div id="askquestion" class="hide">				
+				<form class="dg-question-form">
+					<div class=" rows="10"form-group">
+						<input type="text" class="form-control" placeholder="Question" ng-model="askObj.question"/>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" placeholder="Description" ng-model="askObj.description"></textarea>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" value="html" ng-model="askObj.tags.html" ng-checked="askObj.tags.html"/>HTML</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" value="js" ng-model="askObj.tags.javascript" ng-checked="askObj.tags.javascript"/>JS</label>
+					</div>
+					<div class="checkbox">
+					  <label><input type="checkbox" value="css" ng-model="askObj.tags.css" ng-checked="askObj.tags.css"/>CSS</label>
+					</div>
+					<p ng-show="showmsg" class="error-text">Please fill in all the fields.</p>	
+					<button type="submit" class="btn btn-primary center-block dg-question-sub-btn" ng-click="submitq(askObj)">Submit</button>
+				</form>		
+
+			</div>
+		</div>
+	</body>
+	<script src="../js/angular.js"></script>
+	<script src="../js/mainpage.js"></script>
+</html>
